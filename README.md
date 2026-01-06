@@ -4,7 +4,7 @@
 casased is a Python library to retrieve historical and intraday data from the Casablanca Stock Exchange (Bourse de Casablanca). It provides functions to download historical time series and intraday prices for listed stocks and indices.
 
 <p align="center">
-<img  width="350" height="350" src="media/casased_logo.png">
+<img  src="media/casased.png">
 </p>
 
 casased stands for "Casablanca Stock Exchange data retriever".
@@ -43,6 +43,7 @@ You can find jupyter notebooks on [GitHub](https://github.com/QuantBender/casase
 
 
 ## Release notes
+- v0.1.2 — 2026-01-06 — Use final `casased.png` logo, docs cleanup, small branding fixes.
 - v0.1.1 — 2026-01-06 — Remove demo videos & GIF, update branding with new logo, documentation cleanup.
 - v0.1.0 — initial release. 
 ### Get the notation
