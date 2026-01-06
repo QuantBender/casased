@@ -1,10 +1,40 @@
+Metadata-Version: 2.4
+Name: casased
+Version: 0.1.0
+Summary: Python library to retrieve historical and intraday data from Casablanca Stock Exchange
+Home-page: https://github.com/QuantBender/casased
+Author: ANDAM Amine
+Author-email: andamamine83@gmail.com
+License: MIT
+Keywords: Web scraping,financial data,casablanca
+Classifier: Programming Language :: Python :: 3
+Classifier: License :: OSI Approved :: MIT License
+Classifier: Operating System :: OS Independent
+Description-Content-Type: text/markdown
+License-File: LICENSE
+Requires-Dist: requests
+Requires-Dist: beautifulsoup4
+Requires-Dist: pandas
+Requires-Dist: lxml
+Dynamic: author
+Dynamic: author-email
+Dynamic: classifier
+Dynamic: description
+Dynamic: description-content-type
+Dynamic: home-page
+Dynamic: keywords
+Dynamic: license
+Dynamic: license-file
+Dynamic: requires-dist
+Dynamic: summary
+
 ## 👋👋 We are looking for volunteers who are interested in taking over the maintenance and development of this library. If you are interested in contributing, please reach out to us or create an issue on GitHub to express your interest.
 
 # casased
 casased is a Python library to retrieve historical and intraday data from the Casablanca Stock Exchange (Bourse de Casablanca). It provides functions to download historical time series and intraday prices for listed stocks and indices.
 
 <p align="center">
-<img  width="350" height="350" src="media/casased_logo.png">
+<img  width="350" height="350" src="https://user-images.githubusercontent.com/49843367/234708277-14d932f3-ba75-4bd8-9e6d-2a0b49c876b8.jpg">
 </p>
 
 casased stands for "Casablanca Stock Exchange data retriever".
@@ -33,6 +63,8 @@ _Demo videos removed — see the example notebooks or the `media/` folder for vi
 
 You can get all the key indicators available at "Bourse de Casablanca"
 
+
+_Demo videos removed — see the example notebooks or the `media/` folder for visuals._
 
 You can also get indexes summary for each session. Examples and more functions are available at  [this notebook](/casased_Exemple.ipynb)
 ![indicateur_02](https://user-images.githubusercontent.com/49843367/159123465-bd556c63-bbbf-4354-aea8-fbd43f900983.png)
