@@ -1,6 +1,5 @@
-## 👋👋 We are looking for volunteers who are interested in taking over the maintenance and development of this library. If you are interested in contributing, please reach out to us or create an issue on GitHub to express your interest.
-
 # casased
+
 casased is a Python library to retrieve historical and intraday data from the Casablanca Stock Exchange (Bourse de Casablanca). It provides functions to download historical time series and intraday prices for listed stocks and indices.
 
 <p align="center">
@@ -73,8 +72,8 @@ Syntaxe :`loadata(name, start=None,end=None,decode="utf-8")`
 
 To get data from date 0 (The data is provided from Septembre 2016)
 ```python
-import casased  as bvc
-data=bvc.loadata('BCP')
+import casased as cas
+data=cas.loadata('BCP')
 data.tail()
 ```
 ```{r, engine='python', count_lines}
@@ -88,7 +87,7 @@ data.tail()
 ```
 You can get data between two periods :
 ```python
-data=bvc.loadata('CIH',start='2018-01-01',end='2019-01-01')
+data=cas.loadata('CIH',start='2018-01-01',end='2019-01-01')
 data
 ```
 ```{r, engine='python', count_lines}
@@ -102,7 +101,7 @@ date
 ```
 You can get the historical data of MASI and MSI20
 ```python
-data=bvc.loadata('MASI',start='2022-09-01',end='2022-09-5')
+data=cas.loadata('MASI',start='2022-09-01',end='2022-09-5')
 data
 ```
 ```{r, engine='python', count_lines}
@@ -114,7 +113,7 @@ labels
 ```
 
 ```python
-data=bvc.loadata('MSI20',start='2022-09-01',end='2022-09-5')
+data=cas.loadata('MSI20',start='2022-09-01',end='2022-09-5')
 data
 ```
 ```{r, engine='python', count_lines}
@@ -129,7 +128,7 @@ Sometime you may face some encoding\decoding issues, you can change the value of
 ### Data of many stocks
 Syntaxe :`loadmany(*args,start=None,end=None,feature="Value",decode="utf-8")`
 ```python
-data=bvc.loadmany('BCP','CIH')
+data=cas.loadmany('BCP','CIH')
 data.tail()
 ```
 ```{r, engine='python', count_lines}
@@ -142,7 +141,7 @@ data.tail()
 ```
 You can use start and end arguments :
 ```python
-data=bvc.loadmany('BCP','CIH',start='2018-01-01',end='2019-01-01')
+data=cas.loadmany('BCP','CIH',start='2018-01-01',end='2019-01-01')
 data.tail()
 ```
 ```{r, engine='python', count_lines}
@@ -163,7 +162,7 @@ date
 In case you want to have data of lots of stocks you can give the function a list of these stocks. Moreover `feature` argument let you choose another variable (Value, Min, Max, Variation, Volume")
 
 ```python
-data=bvc.loadmany(['BCP','BMCI','BOA','CIH'],start="2021-08-30",end='2021-09-04',feature="Volume")
+data=cas.loadmany(['BCP','BMCI','BOA','CIH'],start="2021-08-30",end='2021-09-04',feature="Volume")
 data
 ```
 ```{r, engine='python', count_lines}
@@ -178,8 +177,8 @@ data
 ## Intraday data
 Syntaxe : `getIntraday(name,decode="utf-8")`
 ```python
-import casased  as load
-data=load.getIntraday('MASI')
+import casased as cas
+data=cas.getIntraday('MASI')
 data
 ```
 ```{r, engine='python',count_lines}
@@ -199,7 +198,7 @@ data
 ## Session data
 Syntaxe : `getCours(name)`
 ```python
-cours=bvc.getCours("BOA") 
+cours=cas.getCours("BOA") 
 cours.keys()
 ```
 ```{r,engine="python",count_lines}
@@ -215,7 +214,7 @@ pd.DataFrame(cours["Dernieres_Tansaction"])
 ## Key Indicators
 Syntaxe : `getKeyIndicators(name,decode='utf-8')`
 ```python
-indicateur=bvc.getKeyIndicators('BOA')
+indicateur=cas.getKeyIndicators('BOA')
 indicateur.keys()
 ```
 ```{r,engine="python",count_lines}
@@ -224,7 +223,7 @@ dict_keys(['Info_Societe', 'Actionnaires', 'Chiffres_cles', 'Ratio'])
 ## Dividend
 Syntaxe: `getDividend(name,decode='utf-8')`
 ```python
-dividends=bvc.getDividend("BOA")
+dividends=cas.getDividend("BOA")
 pd.DataFrame(dividends)
 ```
 ```{r,engine="python",count_lines}
@@ -237,7 +236,7 @@ pd.DataFrame(dividends)
 ## Indexes summary
 Syntaxe : `getIndex()`
 ```python
-index=bvc.getIndex()
+index=cas.getIndex()
 index.keys()
 ```
 ```{r,engine="python",count_lines}
@@ -246,7 +245,7 @@ dict_keys(['Resume indice', 'Indice rentabilite', 'Indices en devises', 'Indice 
 ## Weights
 Syntaxe : `getPond()`
 ```python
-pond=bvc.getPond()
+pond=cas.getPond()
 pd.DataFrame(pond)
 ```
 ```{r,engine="python",count_lines}
@@ -258,7 +257,7 @@ pd.DataFrame(pond)
 ## Indexes of the current session
 Syntaxe: `getIndexRecap()`
 ```python
-recap=bvc.getIndexRecap()
+recap=cas.getIndexRecap()
 recap.keys()
 ```
 ```{r,engine="python",count_lines}
