@@ -6,7 +6,7 @@ with open('README.md') as readme_file:
 
 setup_args = dict(
     name='casased',
-    version='0.1.0',
+    version='0.1.1',
     description='Python library to retrieve historical and intraday data from Casablanca Stock Exchange',
     long_description_content_type="text/markdown",
     long_description=README,
@@ -24,4 +24,9 @@ setup_args = dict(
 )
 
 install_requires = ['requests','beautifulsoup4','pandas','lxml']
+
+
+if __name__ == "__main__":
+    # Execute setup when running setup.py directly (support legacy builds)
+    setup(**setup_args, install_requires=install_requires)
 

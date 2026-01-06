@@ -40,6 +40,11 @@ You can also get indexes summary for each session. Examples and more functions a
 ## How to use
 To use this libary there is a notation to respect: names of stocks.
 You can find jupyter notebooks on [GitHub](https://github.com/QuantBender/casased)
+
+
+## Release notes
+- v0.1.1 — 2026-01-06 — Remove demo videos & GIF, update branding with new logo, documentation cleanup.
+- v0.1.0 — initial release. 
 ### Get the notation
 ```python
 import casased as cas
