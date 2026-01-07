@@ -1,4 +1,5 @@
 # Store the notation of the website
+# Last updated: 2026-01-07 from https://www.casablanca-bourse.com/en/marche-cash/instruments-actions
 def notation(): 
 	return ['Addoha',
  'AFMA',
@@ -18,15 +19,20 @@ def notation():
  'BCP',
  'BMCI',
  'Cartier Saada',
+ 'Cash Plus',
  'CDM',
+ 'CFG Bank',
  'CIH',
  'Ciments Maroc',
+ 'CMGP Group',
  'CMT',
  'Colorado',
  'COSUMAR',
  'CTM',
- 'Dari Couspate', 
+ 'Dari Couspate',
+ 'Delattre Levivier',
  'Delta Holding',
+ 'DIAC Salaf',
  'Disty Technolog',
  'DISWAY',
  'Ennakl',
@@ -46,6 +52,7 @@ def notation():
  'Managem',
  'Maroc Leasing',
  'Maroc Telecom',
+ 'Med Paper',
  'Microdata',
  'Mutandis',
  'Oulmes',
@@ -56,6 +63,7 @@ def notation():
  'S2M',
  'Sanlam Maroc',
  'SALAFIN',
+ 'SGTM',
  'SMI',
  'Stokvis Nord Afr',
  'SNEP',
@@ -92,21 +100,26 @@ def notation_code():
  {'name': 'BCP', 'ISIN': 'MA0000011884'},
  {'name': 'BMCI', 'ISIN': 'MA0000010811'},
  {'name': 'Cartier Saada', 'ISIN': 'MA0000011868'},
+ {'name': 'Cash Plus', 'ISIN': 'MA0000012767'},
  {'name': 'CDM', 'ISIN': 'MA0000010381'},
+ {'name': 'CFG Bank', 'ISIN': 'MA0000012627'},
  {'name': 'CIH', 'ISIN': 'MA0000011454'},
  {'name': 'Ciments Maroc', 'ISIN': 'MA0000010506'},
+ {'name': 'CMGP Group', 'ISIN': 'MA0000012718'},
  {'name': 'CMT', 'ISIN': 'MA0000011793'},
  {'name': 'Colorado', 'ISIN': 'MA0000011934'},
  {'name': 'COSUMAR', 'ISIN': 'MA0000012247'},
  {'name': 'CTM', 'ISIN': 'MA0000010340'},
  {'name': 'Dari Couspate', 'ISIN': 'MA0000011421'},
+ {'name': 'Delattre Levivier', 'ISIN': 'MA0000012551'},
  {'name': 'Delta Holding', 'ISIN': 'MA0000011850'},
+ {'name': 'DIAC Salaf', 'ISIN': 'MA0000010639'},
  {'name': 'Disty Technolog', 'ISIN': 'MA0000012536'},
  {'name': 'DISWAY', 'ISIN': 'MA0000011637'},
  {'name': 'Ennakl', 'ISIN': 'MA0000011942'},
  {'name': 'EQDOM', 'ISIN': 'MA0000010357'},
  {'name': 'FENIE BROSSETTE', 'ISIN': 'MA0000011587'},
- {'name': 'HPS', 'ISIN': 'MA0000011611'},
+ {'name': 'HPS', 'ISIN': 'MA0000012619'},
  {'name': 'IBMaroc', 'ISIN': 'MA0000011132'},
  {'name': 'Immr Invest', 'ISIN': 'MA0000012387'},
  {'name': 'INVOLYS', 'ISIN': 'MA0000011579'},
@@ -120,6 +133,7 @@ def notation_code():
  {'name': 'Managem', 'ISIN': 'MA0000011058'},
  {'name': 'Maroc Leasing', 'ISIN': 'MA0000010035'},
  {'name': 'Maroc Telecom', 'ISIN': 'MA0000011488'},
+ {'name': 'Med Paper', 'ISIN': 'MA0000012593'},
  {'name': 'Microdata', 'ISIN': 'MA0000012163'},
  {'name': 'Mutandis', 'ISIN': 'MA0000012395'},
  {'name': 'Oulmes', 'ISIN': 'MA0000010415'},
@@ -130,6 +144,7 @@ def notation_code():
  {'name': 'S2M', 'ISIN': 'MA0000012106'},
  {'name': 'Sanlam Maroc', 'ISIN': 'MA0000012007'},
  {'name': 'SALAFIN', 'ISIN': 'MA0000011744'},
+ {'name': 'SGTM', 'ISIN': 'MA0000012783'},
  {'name': 'SMI', 'ISIN': 'MA0000010068'},
  {'name': 'Stokvis Nord Afr', 'ISIN': 'MA0000011843'},
  {'name': 'SNEP', 'ISIN': 'MA0000011728'},
@@ -145,10 +160,12 @@ def notation_code():
  {'name': 'Total Maroc', 'ISIN': 'MA0000012262'},
  {'name': 'Unimer', 'ISIN': 'MA0000012023'},
  {'name': 'Wafa Assur', 'ISIN': 'MA0000010928'},
- {'name': 'Zellidja', 'ISIN': 'MA0000010571'},{'name': 'MASI', 'ISIN': ''},{'name': 'MSI20', 'ISIN': ''}]
+ {'name': 'Zellidja', 'ISIN': 'MA0000010571'},
+ {'name': 'MASI', 'ISIN': ''},
+ {'name': 'MSI20', 'ISIN': ''}]
     
 def notation_value():
-  return {'Addoha' : '9000' , 'AFMA' : '12200' , 'Afric Indus' : '11700' , 'Afriquia Gaz' : '7100' , 'Agma' : '6700' , 'Alliances' : '11200' , 'Aluminium Maroc' : '6600' , 'Aradei Capital' : '27' , 'ATLANTASANAD' : '10300' , 'Attijariwafa' : '8200' , 'Auto Hall' : '3200' , 'Auto Nejma' : '7000' , 'BALIMA' : '3300' , 'BOA' : '1100' , 'BCP' : '8000' , 'BMCI' : '5100' , 'Cartier Saada' : '8900' , 'CDM' : '3600'  , 'CIH' : '3100' , 'Ciments Maroc' : '4000' , 'CMT' : '11000' , 'Colorado' : '9200' , 'COSUMAR' : '4100' , 'CTM' : '2200' , 'Dari Couspate' : '8500' , 'Delattre Lev' : '10800' , 'Delta Holding' : '10900' , 'DISWAY' : '9700' , 'Ennakl' : '11300' , 'EQDOM' : '2300' , 'FENIE BROSSETTE' : '9300' , 'HPS' : '9600' , 'IBMaroc' : '7600' , 'Immr Invest' : '12' , 'INVOLYS' : '9500' , 'Jet Contractors' : '11600' , 'LABEL VIE' : '11100' , 'LafargeHolcim' : '3800' , 'Lesieur Cristal' : '4800' , 'M2M Group' : '10000' , 'Maghreb Oxygene' : '7200' , 'Maghrebail' : '1600' , 'Managem' : '7300' , 'Maroc Leasing' : '2500' , 'Maroc Telecom' : '8001' , 'Med Paper' : '6500' , 'Microdata' : '10600' , 'Mutandis' : '21' , 'Nexans Maroc' : '7400' , 'Oulmes' : '5200' , 'PROMOPHARM' : '9900' , 'Rebab Company' : '5300' , 'Res.Dar Saada' : '12000' , 'Risma' : '8700' , 'S2M' : '11800' , 'Sanlam Assurance' : '11400' , 'SALAFIN' : '10700' ,  'SMI' : '1500' , 'Stokvis Nord Afr' : '10500' , 'SNEP' : '9400' , 'SODEP' : '12300' , 'Sonasid' : '1300' , 'SOTHEMA' : '9800' , 'SRM' : '2000' , 'Ste Boissons' : '10400' , 'STROC Indus' : '11500' , 'TAQA Morocco' : '11900' , 'Timar' : '10100' , 'Total Maroc' : '12100' , 'Unimer' : '7500' , 'Wafa Assur' : '6400' , 'Zellidja' : '5800','Akdital':"35","Disty Technologis":"32","TGCC":"29"}
+  return {'Addoha' : '9000' , 'AFMA' : '12200' , 'Afric Indus' : '11700' , 'Afriquia Gaz' : '7100' , 'Agma' : '6700' , 'Akdital' : '35' , 'Alliances' : '11200' , 'Aluminium Maroc' : '6600' , 'Aradei Capital' : '27' , 'ATLANTASANAD' : '10300' , 'Attijariwafa' : '8200' , 'Auto Hall' : '3200' , 'Auto Nejma' : '7000' , 'BALIMA' : '3300' , 'BOA' : '1100' , 'BCP' : '8000' , 'BMCI' : '5100' , 'Cartier Saada' : '8900' , 'Cash Plus' : '40' , 'CDM' : '3600' , 'CFG Bank' : '38' , 'CIH' : '3100' , 'Ciments Maroc' : '4000' , 'CMGP Group' : '39' , 'CMT' : '11000' , 'Colorado' : '9200' , 'COSUMAR' : '4100' , 'CTM' : '2200' , 'Dari Couspate' : '8500' , 'Delattre Levivier' : '10800' , 'Delta Holding' : '10900' , 'DIAC Salaf' : '36' , 'Disty Technolog' : '32' , 'DISWAY' : '9700' , 'Ennakl' : '11300' , 'EQDOM' : '2300' , 'FENIE BROSSETTE' : '9300' , 'HPS' : '9600' , 'IBMaroc' : '7600' , 'Immr Invest' : '12' , 'INVOLYS' : '9500' , 'Jet Contractors' : '11600' , 'LABEL VIE' : '11100' , 'LafargeHolcim' : '3800' , 'Lesieur Cristal' : '4800' , 'M2M Group' : '10000' , 'Maghreb Oxygene' : '7200' , 'Maghrebail' : '1600' , 'Managem' : '7300' , 'Maroc Leasing' : '2500' , 'Maroc Telecom' : '8001' , 'Med Paper' : '37' , 'Microdata' : '10600' , 'Mutandis' : '21' , 'Oulmes' : '5200' , 'PROMOPHARM' : '9900' , 'Rebab Company' : '5300' , 'Res.Dar Saada' : '12000' , 'Risma' : '8700' , 'S2M' : '11800' , 'Sanlam Maroc' : '11400' , 'SALAFIN' : '10700' , 'SGTM' : '41' , 'SMI' : '1500' , 'Stokvis Nord Afr' : '10500' , 'SNEP' : '9400' , 'SODEP' : '12300' , 'Sonasid' : '1300' , 'SOTHEMA' : '9800' , 'SRM' : '2000' , 'Ste Boissons' : '10400' , 'STROC Indus' : '11500' , 'TAQA Morocco' : '11900' , 'TGCC' : '29' , 'Timar' : '10100' , 'Total Maroc' : '12100' , 'Unimer' : '7500' , 'Wafa Assur' : '6400' , 'Zellidja' : '5800'}
 
 
 def list_assets():
