@@ -6,7 +6,7 @@ with open('README.md') as readme_file:
 
 setup_args = dict(
     name='casased',
-    version='0.1.3',
+    version='0.1.4',
     description='Python library to retrieve historical and intraday data from Casablanca Stock Exchange via Medias24 API',
     long_description_content_type="text/markdown",
     long_description=README,
