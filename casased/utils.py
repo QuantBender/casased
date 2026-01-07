@@ -31,7 +31,7 @@ def _fetch_with_browser(url, timeout: int = 30):
             browser = await uc.start(headless=True)
             try:
                 page = await browser.get(url)
-                await asyncio.sleep(2)  # Wait for JS to execute
+                await asyncio.sleep(10)  # Wait for JS to execute and Cloudflare to solve
                 content = await page.get_content()
                 await browser.stop()
                 return content
@@ -72,7 +72,7 @@ def _fetch_with_browser(url, timeout: int = 30):
         driver = Driver(uc=True, headless=True)
         try:
             driver.get(url)
-            driver.sleep(2)  # Wait for JS
+            driver.sleep(10)  # Wait for JS
             content = driver.page_source
             driver.quit()
             
