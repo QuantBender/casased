@@ -57,14 +57,17 @@ def get_history(identifier: str, start: Optional[Union[str, datetime.date]] = No
             r = fetch_url(link, method='get', headers=_USER_AGENT, timeout=10)
             try:
                 data = r.json()
-            except ValueError:
+            except (ValueError, Exception) as json_err:
                 # Some proxies embed the JSON inside HTML; try to extract it
                 import json, re
                 m = re.search(r'({.*"result".*})', r.text, flags=re.S)
                 if m:
-                    data = json.loads(m.group(1))
+                    try:
+                        data = json.loads(m.group(1))
+                    except:
+                        raise json_err
                 else:
-                    raise
+                    raise json_err
         except Exception:
             # Let outer try/except decide whether to raise or return empty DataFrame
             raise

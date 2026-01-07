@@ -115,6 +115,13 @@ def fetch_url(url, method: str = 'get', data=None, headers=None, timeout: int = 
     headers = headers or {"User-Agent": "Mozilla/5.0"}
 
     last_exc = None
+    
+    def is_cloudflare_blocked(response):
+        """Check if response is a Cloudflare challenge page."""
+        if response.status_code != 200:
+            return False
+        text = response.text[:1000].lower()
+        return 'cloudflare' in text and ('challenge' in text or 'just a moment' in text)
 
     # Try direct request (GET or POST)
     try:
@@ -123,7 +130,10 @@ def fetch_url(url, method: str = 'get', data=None, headers=None, timeout: int = 
         else:
             r = requests.get(url, headers=headers, timeout=timeout, verify=verify)
         r.raise_for_status()
-        return r
+        if not is_cloudflare_blocked(r):
+            return r
+        else:
+            last_exc = Exception("403 Cloudflare challenge detected")
     except Exception as e:
         last_exc = e
 
@@ -140,7 +150,10 @@ def fetch_url(url, method: str = 'get', data=None, headers=None, timeout: int = 
                 else:
                     r = requests.get(url, headers=headers, timeout=timeout, verify=False)
             r.raise_for_status()
-            return r
+            if not is_cloudflare_blocked(r):
+                return r
+            else:
+                last_exc = Exception("403 Cloudflare challenge detected")
         except Exception as e:
             last_exc = e
 
@@ -151,12 +164,13 @@ def fetch_url(url, method: str = 'get', data=None, headers=None, timeout: int = 
             try:
                 r = requests.get(proxy_url, headers=headers, timeout=timeout)
                 r.raise_for_status()
-                return r
+                if not is_cloudflare_blocked(r):
+                    return r
             except Exception as e:
                 last_exc = e
 
     # Final fallback: browser automation (only for GET requests to avoid Cloudflare)
-    if use_browser and method.lower() == 'get' and ('403' in str(last_exc) or 'cloudflare' in str(last_exc).lower()):
+    if use_browser and method.lower() == 'get':
         try:
             return _fetch_with_browser(url, timeout=30)
         except Exception as e:
