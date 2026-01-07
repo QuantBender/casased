@@ -26,6 +26,20 @@ A Python library to retrieve historical and intraday data from the Casablanca St
 pip install casased
 ```
 
+### Cloudflare Bypass (Optional)
+
+If you encounter 403 errors due to Cloudflare protection, install browser automation tools:
+
+```bash
+# Install with browser automation support
+pip install casased[cloudflare]
+
+# Or install manually
+pip install nodriver seleniumbase
+```
+
+The library will automatically use headless browser automation as a fallback when direct API requests fail.
+
 ## Quick Start
 
 ```python

@@ -16,6 +16,12 @@ Requires-Dist: requests
 Requires-Dist: beautifulsoup4
 Requires-Dist: pandas
 Requires-Dist: lxml
+Provides-Extra: cloudflare
+Requires-Dist: nodriver>=0.30; extra == "cloudflare"
+Requires-Dist: seleniumbase>=4.0.0; extra == "cloudflare"
+Provides-Extra: browser
+Requires-Dist: nodriver>=0.30; extra == "browser"
+Requires-Dist: seleniumbase>=4.0.0; extra == "browser"
 Dynamic: author
 Dynamic: author-email
 Dynamic: classifier
@@ -25,6 +31,7 @@ Dynamic: home-page
 Dynamic: keywords
 Dynamic: license
 Dynamic: license-file
+Dynamic: provides-extra
 Dynamic: requires-dist
 Dynamic: summary
 

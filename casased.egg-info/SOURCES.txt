@@ -5,6 +5,7 @@ setup.py
 casased/__init__.py
 casased/load.py
 casased/notation.py
+casased/py.typed
 casased/tech.py
 casased/utils.py
 casased.egg-info/PKG-INFO

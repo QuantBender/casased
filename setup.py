@@ -6,8 +6,8 @@ with open('README.md') as readme_file:
 
 setup_args = dict(
     name='casased',
-    version='0.1.4',
-    description='Python library to retrieve historical and intraday data from Casablanca Stock Exchange via Medias24 API',
+    version='0.1.5',
+    description='Python library to retrieve historical and intraday data from Casablanca Stock Exchange via Medias24 API with Cloudflare bypass',
     long_description_content_type="text/markdown",
     long_description=README,
     license='MIT',
@@ -25,8 +25,13 @@ setup_args = dict(
 
 install_requires = ['requests','beautifulsoup4','pandas','lxml']
 
+# Optional dependencies for bypassing Cloudflare protection
+extras_require = {
+    'cloudflare': ['nodriver>=0.30', 'seleniumbase>=4.0.0'],
+    'browser': ['nodriver>=0.30', 'seleniumbase>=4.0.0'],
+}
 
 if __name__ == "__main__":
     # Execute setup when running setup.py directly (support legacy builds)
-    setup(**setup_args, install_requires=install_requires)
+    setup(**setup_args, install_requires=install_requires, extras_require=extras_require)
 

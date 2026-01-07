@@ -16,11 +16,101 @@ PROXY_MAKERS = [
 ]
 
 
-def fetch_url(url, method: str = 'get', data=None, headers=None, timeout: int = 10, verify: bool = True, allow_proxies: bool = True):
-    """Fetch a URL with optional POST data and automatic proxy fallbacks.
+def _fetch_with_browser(url, timeout: int = 30):
+    """Fetch URL using browser automation to bypass Cloudflare protection.
+    
+    Tries nodriver first (lightweight), then falls back to seleniumbase with UC mode.
+    Returns a requests.Response-like object with .text and .json() method.
+    """
+    # Try nodriver first (modern, lightweight, designed for Cloudflare bypass)
+    try:
+        import nodriver as uc
+        import asyncio
+        
+        async def fetch():
+            browser = await uc.start(headless=True)
+            try:
+                page = await browser.get(url)
+                await asyncio.sleep(2)  # Wait for JS to execute
+                content = await page.get_content()
+                await browser.stop()
+                return content
+            except Exception:
+                await browser.stop()
+                raise
+        
+        content = asyncio.run(fetch())
+        
+        # Extract JSON from HTML if wrapped in <pre> tags
+        import re
+        json_match = re.search(r'<pre[^>]*>(.+?)</pre>', content, re.DOTALL)
+        if json_match:
+            content = json_match.group(1).strip()
+        
+        # Create a response-like object
+        class BrowserResponse:
+            def __init__(self, text):
+                self.text = text
+                self.status_code = 200
+            def json(self):
+                return json.loads(self.text)
+            def raise_for_status(self):
+                pass
+        
+        return BrowserResponse(content)
+    
+    except ImportError:
+        pass  # nodriver not installed, try next option
+    except Exception:
+        pass  # nodriver failed, try next option
+    
+    # Try seleniumbase with UC mode
+    try:
+        from seleniumbase import Driver
+        import re
+        
+        driver = Driver(uc=True, headless=True)
+        try:
+            driver.get(url)
+            driver.sleep(2)  # Wait for JS
+            content = driver.page_source
+            driver.quit()
+            
+            # Extract JSON from HTML if wrapped in <pre> tags
+            json_match = re.search(r'<pre[^>]*>(.+?)</pre>', content, re.DOTALL)
+            if json_match:
+                content = json_match.group(1).strip()
+            
+            class BrowserResponse:
+                def __init__(self, text):
+                    self.text = text
+                    self.status_code = 200
+                def json(self):
+                    return json.loads(self.text)
+                def raise_for_status(self):
+                    pass
+            
+            return BrowserResponse(content)
+        except Exception:
+            driver.quit()
+            raise
+    
+    except ImportError:
+        pass  # seleniumbase not installed
+    except Exception:
+        pass  # seleniumbase failed
+    
+    raise RuntimeError("Browser automation failed: install 'nodriver' or 'seleniumbase' to bypass Cloudflare protection")
 
-    Tries direct request first, then (optionally) tries proxy endpoints. Returns a
-    requests.Response on success or raises the last exception on failure.
+
+def fetch_url(url, method: str = 'get', data=None, headers=None, timeout: int = 10, verify: bool = True, allow_proxies: bool = True, use_browser: bool = True):
+    """Fetch a URL with optional POST data and automatic fallbacks.
+
+    Tries direct request first, then proxies, then browser automation if available.
+    Returns a requests.Response on success or raises the last exception on failure.
+    
+    Args:
+        use_browser: If True, will attempt browser automation as final fallback (default: True)
     """
     headers = headers or {"User-Agent": "Mozilla/5.0"}
 
@@ -64,6 +154,13 @@ def fetch_url(url, method: str = 'get', data=None, headers=None, timeout: int = 
                 return r
             except Exception as e:
                 last_exc = e
+
+    # Final fallback: browser automation (only for GET requests to avoid Cloudflare)
+    if use_browser and method.lower() == 'get' and ('403' in str(last_exc) or 'cloudflare' in str(last_exc).lower()):
+        try:
+            return _fetch_with_browser(url, timeout=30)
+        except Exception as e:
+            last_exc = e
 
     # All attempts failed
     raise last_exc

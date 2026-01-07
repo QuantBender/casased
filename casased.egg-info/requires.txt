@@ -2,3 +2,11 @@ requests
 beautifulsoup4
 pandas
 lxml
+
+[browser]
+nodriver>=0.30
+seleniumbase>=4.0.0
+
+[cloudflare]
+nodriver>=0.30
+seleniumbase>=4.0.0
