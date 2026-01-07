@@ -40,3 +40,43 @@ def test_get_intraday(monkeypatch):
     df = casased.get_intraday('Addoha')
     # the implementation may return a raw DataFrame or a parsed one, ensure it doesn't error and is a DataFrame
     assert hasattr(df, 'columns')
+
+
+def test_get_history_http_error(monkeypatch):
+    # Import local modules from the repository to test the repository implementation
+    import importlib.util, os
+    repo_root = os.path.dirname(os.path.dirname(__file__))
+    local_load_path = os.path.join(repo_root, 'casased', 'load.py')
+    local_utils_path = os.path.join(repo_root, 'casased', 'utils.py')
+
+    # Ensure the repository package is importable first
+    import sys
+    sys.path.insert(0, repo_root)
+    try:
+        # Ensure we import the repository package instead of the installed one
+        for k in list(sys.modules.keys()):
+            if k == 'casased' or k.startswith('casased.'):
+                sys.modules.pop(k, None)
+        pkg = importlib.import_module('casased')
+        importlib.reload(pkg)
+        local_load = importlib.import_module('casased.load')
+        local_utils = importlib.import_module('casased.utils')
+
+        def raise_http_error(*args, **kwargs):
+            raise requests.HTTPError("403 Client Error: Forbidden for url")
+
+        # Patch fetch_url in the local utils module
+        monkeypatch.setattr(local_utils, 'fetch_url', raise_http_error)
+
+        # Call the local implementation
+        df = local_load.get_history('Addoha')
+        assert df.empty
+
+        with pytest.raises(requests.HTTPError):
+            local_load.get_history('Addoha', raise_on_error=True)
+    finally:
+        # restore path
+        try:
+            sys.path.pop(0)
+        except Exception:
+            pass

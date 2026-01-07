@@ -3,7 +3,70 @@ import requests
 import pandas as pd
 import json
 import datetime
+from urllib.parse import quote
+import urllib3
 from .notation import *
+
+# Proxy makers used as fallbacks when direct requests fail
+PROXY_MAKERS = [
+    lambda u: u,
+    lambda u: "https://api.allorigins.win/raw?url=" + quote(u, safe=''),
+    lambda u: "https://api.codetabs.com/v1/proxy?quest=" + quote(u, safe=''),
+    lambda u: "https://r.jina.ai/http://" + u.replace("https://", "").replace("http://", ""),
+]
+
+
+def fetch_url(url, method: str = 'get', data=None, headers=None, timeout: int = 10, verify: bool = True, allow_proxies: bool = True):
+    """Fetch a URL with optional POST data and automatic proxy fallbacks.
+
+    Tries direct request first, then (optionally) tries proxy endpoints. Returns a
+    requests.Response on success or raises the last exception on failure.
+    """
+    headers = headers or {"User-Agent": "Mozilla/5.0"}
+
+    last_exc = None
+
+    # Try direct request (GET or POST)
+    try:
+        if method.lower() == 'post':
+            r = requests.post(url, data=data, headers=headers, timeout=timeout, verify=verify)
+        else:
+            r = requests.get(url, headers=headers, timeout=timeout, verify=verify)
+        r.raise_for_status()
+        return r
+    except Exception as e:
+        last_exc = e
+
+    # If SSL verification failed and we attempted with verify=True, retry without verification
+    if verify and any(k in str(last_exc).lower() for k in ['ssl', 'certificate', 'verify']):
+        try:
+            # Suppress the InsecureRequestWarning when we intentionally disable verification
+            import warnings
+            from urllib3.exceptions import InsecureRequestWarning
+            with warnings.catch_warnings():
+                warnings.simplefilter('ignore', InsecureRequestWarning)
+                if method.lower() == 'post':
+                    r = requests.post(url, data=data, headers=headers, timeout=timeout, verify=False)
+                else:
+                    r = requests.get(url, headers=headers, timeout=timeout, verify=False)
+            r.raise_for_status()
+            return r
+        except Exception as e:
+            last_exc = e
+
+    # Try proxies (use GET via proxies since many public proxies only support GET)
+    if allow_proxies:
+        for maker in PROXY_MAKERS[1:]:
+            proxy_url = maker(url)
+            try:
+                r = requests.get(proxy_url, headers=headers, timeout=timeout)
+                r.raise_for_status()
+                return r
+            except Exception as e:
+                last_exc = e
+
+    # All attempts failed
+    raise last_exc
 
 
 def get_code(name):
